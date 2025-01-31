@@ -1,4 +1,5 @@
 import 'package:app/core/app_colors.dart';
+import 'package:app/views/auth/UI/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidget extends StatelessWidget {
@@ -18,13 +19,8 @@ class LoginWidget extends StatelessWidget {
           text,
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        ElevatedButton(
+        CustomButton(
           onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8))),
-              backgroundColor: AppColors.kPrimaryColor,
-              padding: const EdgeInsets.all(10)),
           child: const Icon(
             Icons.arrow_forward,
             color: AppColors.kWhiteColor,

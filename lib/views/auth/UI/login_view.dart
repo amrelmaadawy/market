@@ -1,3 +1,5 @@
+import 'package:app/core/app_colors.dart';
+import 'package:app/views/auth/UI/forget_password.dart';
 import 'package:app/views/auth/UI/widgets/custom_text_form_field.dart';
 import 'package:app/views/auth/UI/widgets/login_widget.dart';
 import 'package:app/views/auth/UI/widgets/text_button.dart';
@@ -28,7 +30,7 @@ class LoginView extends StatelessWidget {
             ),
             Card(
               margin: const EdgeInsets.all(16),
-              color: Colors.white,
+              color:AppColors.kWhiteColor,
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8))),
               child: Padding(
@@ -54,12 +56,17 @@ class LoginView extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Textbutton(
-                          text: 'Forget Password?',
-                        ),
+                            text: 'Forget Password?',
+                            ontap: () => Navigator.push(
+                                  (context),
+                                  MaterialPageRoute(builder: (context) {
+                                    return const ForgetPassword();
+                                  }),
+                                )),
                       ],
                     ),
                     const SizedBox(
@@ -79,12 +86,13 @@ class LoginView extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Don\'t have an account?'),
+                        const Text('Don\'t have an account?'),
                         Textbutton(
                           text: 'Sign up',
+                          ontap: () {},
                         )
                       ],
                     )
@@ -98,5 +106,3 @@ class LoginView extends StatelessWidget {
     );
   }
 }
-
-
