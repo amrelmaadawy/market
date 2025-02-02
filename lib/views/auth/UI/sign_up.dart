@@ -1,18 +1,17 @@
 import 'package:app/core/app_colors.dart';
-import 'package:app/views/auth/UI/forget_password.dart';
-import 'package:app/views/auth/UI/sign_up.dart';
 import 'package:app/views/auth/UI/widgets/custom_text_form_field.dart';
 import 'package:app/views/auth/UI/widgets/login_widget.dart';
 import 'package:app/views/auth/UI/widgets/text_button.dart';
 import 'package:flutter/material.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+class SignUp extends StatelessWidget {
+  const SignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -31,13 +30,21 @@ class LoginView extends StatelessWidget {
             ),
             Card(
               margin: const EdgeInsets.all(16),
-              color:AppColors.kWhiteColor,
+              color: AppColors.kWhiteColor,
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8))),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
+                    CustomTextFormFeild(
+                        lableText: 'Name',
+                        controller: nameController,
+                        obscureText: false,
+                        keyboardType: TextInputType.text),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     CustomTextFormFeild(
                         lableText: 'Email',
                         controller: emailController,
@@ -57,34 +64,18 @@ class LoginView extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Textbutton(
-                            text: 'Forget Password?',
-                            ontap: () => Navigator.push(
-                                  (context),
-                                  MaterialPageRoute(builder: (context) {
-                                    return const ForgetPassword();
-                                  }),
-                                ),
-                                
-                                
-                                ),
-                      ],
-                    ),
                     const SizedBox(
                       height: 20,
                     ),
                     LoginWidget(
-                      text: 'Login',
+                      text: 'Sign Up',
                       onPressed: () {},
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     LoginWidget(
-                      text: 'Login With Google',
+                      text: 'Sign Up With Google',
                       onPressed: () {},
                     ),
                     const SizedBox(
@@ -93,16 +84,11 @@ class LoginView extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Don\'t have an account? '),
+                        const Text('already have an account? '),
                         Textbutton(
-                          text: 'Sign up',
+                          text: 'Login',
                           ontap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) {
-                                return const SignUp();
-                              }),
-                            );
+                            Navigator.pop(context);
                           },
                         )
                       ],
