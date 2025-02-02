@@ -83,7 +83,7 @@ class LoginView extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
-                            return const MainHomeView();
+                            return MainHomeView();
                           }),
                         );
                       },
