@@ -1,5 +1,8 @@
 import 'package:app/core/app_colors.dart';
 import 'package:app/views/home/UI/widgets/categories_list.dart';
+import 'package:app/views/home/UI/widgets/offers_product.dart';
+import 'package:app/views/home/UI/widgets/product_name.dart';
+import 'package:app/views/home/UI/widgets/product_price.dart';
 import 'package:app/views/home/UI/widgets/search_form_feild.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +30,15 @@ class HomeView extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const CategoriesList(),
+          const SizedBox(
+            height: 16,
+          ),
+          const Offers_product(),
+          const SizedBox(
+            height: 16,
+          ),
+          const ProductName(),
+          const ProductPrice()
         ],
       ),
     );
