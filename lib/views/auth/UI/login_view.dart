@@ -4,6 +4,7 @@ import 'package:app/views/auth/UI/sign_up.dart';
 import 'package:app/views/auth/UI/widgets/custom_text_form_field.dart';
 import 'package:app/views/auth/UI/widgets/login_widget.dart';
 import 'package:app/views/auth/UI/widgets/text_button.dart';
+import 'package:app/views/nav_bar/UI/main_home_view.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatelessWidget {
@@ -78,7 +79,14 @@ class LoginView extends StatelessWidget {
                     ),
                     LoginWidget(
                       text: 'Login',
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return const MainHomeView();
+                          }),
+                        );
+                      },
                     ),
                     const SizedBox(
                       height: 20,
