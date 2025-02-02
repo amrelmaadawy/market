@@ -13,15 +13,13 @@ class HomeView extends StatelessWidget {
       child: ListView(
         children: [
           CustomTextFormFeild(
-              suffixIcon: Container(
-                decoration: BoxDecoration(
-                    color: AppColors.kPrimaryColor,
-                    borderRadius: BorderRadius.circular(8)),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.search),
-                  color: AppColors.kWhiteColor,
-                ),
+              suffixIcon: ElevatedButton(
+                onPressed: () {},
+                style:
+                    ElevatedButton.styleFrom(backgroundColor: AppColors.kPrimaryColor,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    ),
+                child:const Icon(Icons.search,color: AppColors.kWhiteColor,),
               ),
               lableText: 'Search in market',
               controller: searchController,
