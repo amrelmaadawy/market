@@ -19,6 +19,7 @@ class ProductCard extends StatelessWidget {
         ),
         ProductName(),
         ProductPrice(),
+        SizedBox(height: 10,)
       ],
     );
   }
