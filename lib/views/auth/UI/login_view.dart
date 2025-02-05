@@ -6,10 +6,8 @@ import 'package:app/views/auth/UI/widgets/login_widget.dart';
 import 'package:app/views/auth/UI/widgets/text_button.dart';
 import 'package:app/views/nav_bar/UI/main_home_view.dart';
 import 'package:flutter/material.dart';
-
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
-
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
