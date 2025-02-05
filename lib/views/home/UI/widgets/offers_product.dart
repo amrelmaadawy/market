@@ -1,10 +1,9 @@
-
-
 import 'package:app/core/app_colors.dart';
+import 'package:app/views/home/UI/widgets/cashed_loading_image.dart';
 import 'package:flutter/material.dart';
 
-class Offers_product extends StatelessWidget {
-  const Offers_product({
+class OffersProduct extends StatelessWidget {
+  const OffersProduct({
     super.key,
   });
 
@@ -12,15 +11,15 @@ class Offers_product extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        ClipRRect(
-          borderRadius: const BorderRadius.only(
+        const ClipRRect(
+          borderRadius: BorderRadius.only(
             topRight: Radius.circular(16),
             bottomLeft: Radius.circular(16),
             bottomRight: Radius.circular(16),
           ),
-          child: Image.network(
-            'https://img.freepik.com/free-psd/circle-discount-sale-podium_35913-2513.jpg?t=st=1738522193~exp=1738525793~hmac=fc9a9d4a1a7aeaf58e964f89c88b8b9c7111a8253e4a54e02fa4fd38b4b6dacf&w=1060',
-          ),
+          child: CashedLoadingWidget(
+              imageUrl:
+                  "https://img.freepik.com/free-psd/circle-discount-sale-podium_35913-2513.jpg?t=st=1738732832~exp=1738736432~hmac=c97147653932da8294749ff6181c671f46287b814908e81bdebd9608602f93d9&w=1060"),
         ),
         Positioned(
           child: Container(

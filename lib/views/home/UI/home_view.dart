@@ -33,12 +33,12 @@ class HomeView extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          const Offers_product(),
+          const OffersProduct(),
           const SizedBox(
             height: 16,
           ),
           const ProductName(),
-          const ProductPrice()
+          const ProductPrice(),
         ],
       ),
     );

@@ -29,7 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   bloc: ^9.0.0
-  cupertino_icons: ^1.0.8
+  cached_network_image: ^3.4.1
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
@@ -51,8 +51,7 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/buy.jpg
-
+    - assets/images/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
