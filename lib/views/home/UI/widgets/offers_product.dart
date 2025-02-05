@@ -1,5 +1,5 @@
 import 'package:app/core/app_colors.dart';
-import 'package:app/views/home/UI/widgets/cashed_loading_image.dart';
+import 'package:app/core/components/cashed_loading_image.dart';
 import 'package:flutter/material.dart';
 
 class OffersProduct extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:app/core/app_colors.dart';
+import 'package:app/core/components/list_of_products.dart';
+import 'package:app/core/components/product_card.dart';
 import 'package:app/views/home/UI/widgets/categories_list.dart';
-import 'package:app/views/home/UI/widgets/offers_product.dart';
-import 'package:app/views/home/UI/widgets/product_name.dart';
-import 'package:app/views/home/UI/widgets/product_price.dart';
+
 import 'package:app/views/home/UI/widgets/search_form_feild.dart';
 import 'package:flutter/material.dart';
 
@@ -33,12 +33,17 @@ class HomeView extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          const OffersProduct(),
+          const Text('Recntly products',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: AppColors.kBlackColor,
+              )),
           const SizedBox(
             height: 16,
           ),
-          const ProductName(),
-          const ProductPrice(),
+          const ProductCard(),
+        const ListOfProducts()
         ],
       ),
     );
