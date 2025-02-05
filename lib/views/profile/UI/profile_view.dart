@@ -1,4 +1,5 @@
 import 'package:app/core/app_colors.dart';
+import 'package:app/views/profile/UI/edit_name_view.dart';
 import 'package:app/views/profile/UI/widgets/custom_profile_button.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +48,9 @@ class ProfileView extends StatelessWidget {
                     height: 10,
                   ),
                   CustomProfileButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const EditNameView()));
+                    },
                     icon: Icons.person,
                     text: 'Edit Name',
                   ),
