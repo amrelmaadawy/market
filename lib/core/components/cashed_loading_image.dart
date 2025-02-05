@@ -14,7 +14,8 @@ final String imageUrl;
     return CachedNetworkImage(
       imageUrl: imageUrl,
       placeholder: (context, url) =>const SizedBox(
-        height: 200,
+        height: 250,
+        width: double.infinity,
         child:  Center(child: CircularProgressIndicator(
           color: AppColors.kPrimaryColor,
         ))),
