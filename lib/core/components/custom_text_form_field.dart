@@ -21,11 +21,12 @@ class CustomTextFormFeild extends StatelessWidget {
       obscureText: obscureText,
       validator: (value) {
         if (value!.isEmpty) {
-          return 'Please enter your email';
+          return 'Please enter your $lableText';
         }
         return null;
       },
       keyboardType: keyboardType,
+      
       controller: controller,
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
