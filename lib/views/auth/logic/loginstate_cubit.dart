@@ -27,4 +27,23 @@ class LoginstateCubit extends Cubit<LoginstateState> {
       }
     }
   }
+
+
+  Future<void> register({required String email, required String password,required String name}) async {
+    emit(SignUpstateLoading());
+    try {
+      await client.auth.signUp(password: password, email: email);
+      emit(SignUpstateSuccesses());
+    } on AuthApiException catch (e) {
+      emit(SignUpstateErorr(e.message));
+      if (kDebugMode) {
+        print(e.toString());
+      }
+    } catch (e) {
+      emit(SignUpstateErorr(e.toString()));
+      if (kDebugMode) {
+        print(e.toString());
+      }
+    }
+  }
 }

@@ -8,6 +8,7 @@ import 'package:app/core/components/custom_text_form_field.dart';
 import 'package:app/views/auth/UI/widgets/login_widget.dart';
 import 'package:app/views/auth/UI/widgets/text_button.dart';
 import 'package:app/views/auth/logic/loginstate_cubit.dart';
+import 'package:app/views/home/UI/home_view.dart';
 import 'package:app/views/nav_bar/UI/main_home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,12 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginstateCubit, LoginstateState>(
       listener: (context, state) {
-        if (state is LoginstateErorr) {
+        if (state is SignUpstateSuccesses) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) {
+            return const HomeView();
+          }));
+        } else if (state is LoginstateErorr) {
           snakeBar(context, state.message, Colors.red);
         }
       },
@@ -59,12 +65,11 @@ class LoginView extends StatelessWidget {
                             child: Column(
                               children: [
                                 CustomTextFormFeild(
-                                    lableText: 'Email',
-                                    controller: emailController,
-                                    obscureText: false,
-                                    keyboardType: TextInputType.emailAddress,
-                                    
-                                    ),
+                                  lableText: 'Email',
+                                  controller: emailController,
+                                  obscureText: false,
+                                  keyboardType: TextInputType.emailAddress,
+                                ),
                                 const SizedBox(
                                   height: 20,
                                 ),
