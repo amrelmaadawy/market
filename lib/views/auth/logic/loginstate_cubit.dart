@@ -8,6 +8,12 @@ part 'loginstate_state.dart';
 class LoginstateCubit extends Cubit<LoginstateState> {
   LoginstateCubit() : super(LoginstateInitial());
 
+bool isVisible = true;
+  void changeVisibility() {
+    isVisible = !isVisible;
+    emit(IsvisibleState());
+  }
+
   SupabaseClient client = Supabase.instance.client;
 
   Future<void> login({required String email, required String password}) async {
@@ -27,7 +33,6 @@ class LoginstateCubit extends Cubit<LoginstateState> {
       }
     }
   }
-
 
   Future<void> register({required String email, required String password,required String name}) async {
     emit(SignUpstateLoading());

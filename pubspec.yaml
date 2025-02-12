@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  app_links: ^6.3.3
   bloc: ^9.0.0
   cached_network_image: ^3.4.1
   flutter:
@@ -35,6 +36,7 @@ dependencies:
   flutter_bloc: ^9.0.0
   flutter_rating_bar: ^4.0.1
   google_nav_bar: ^5.0.7
+  google_sign_in: ^6.2.2
   supabase_flutter: ^2.8.3
 
 dev_dependencies:

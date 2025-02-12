@@ -1,33 +1,38 @@
 import 'package:app/core/app_colors.dart';
 import 'package:app/core/components/custom_text_form_field.dart';
 import 'package:app/core/functions/snake_bar.dart';
-import 'package:app/views/auth/UI/login_view.dart';
 import 'package:app/views/auth/UI/widgets/login_widget.dart';
 import 'package:app/views/auth/UI/widgets/text_button.dart';
 import 'package:app/views/auth/logic/loginstate_cubit.dart';
-import 'package:app/views/home/UI/home_view.dart';
+import 'package:app/views/nav_bar/UI/main_home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
   @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    final TextEditingController nameController = TextEditingController();
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final cubit = context.read<LoginstateCubit>();
+
     return BlocConsumer<LoginstateCubit, LoginstateState>(
       listener: (context, state) {
         if (state is SignUpstateSuccesses) {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return const HomeView();
+            return MainHomeView();
           }));
         }
-        else if (state is SignUpstateErorr) {
+        if (state is SignUpstateErorr) {
           snakeBar(context, state.message, Colors.red);
         }
       },
@@ -78,11 +83,15 @@ class SignUp extends StatelessWidget {
                           CustomTextFormFeild(
                               lableText: 'Password',
                               controller: passwordController,
-                              obscureText: true,
+                              obscureText: cubit.isVisible,
                               keyboardType: TextInputType.visiblePassword,
                               suffixIcon: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.visibility))),
+                                  onPressed: () {
+                                    cubit.changeVisibility();
+                                  },
+                                  icon: Icon(cubit.isVisible
+                                      ? Icons.visibility_off
+                                      : Icons.visibility))),
                           const SizedBox(
                             height: 16,
                           ),
@@ -99,7 +108,7 @@ class SignUp extends StatelessWidget {
                                     name: nameController.text);
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return LoginView();
+                                  return MainHomeView();
                                 }));
                               } else {
                                 snakeBar(context, 'Please fill all fields',
@@ -140,5 +149,13 @@ class SignUp extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    nameController.dispose();
+    super.dispose();
   }
 }

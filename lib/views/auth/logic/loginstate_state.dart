@@ -11,6 +11,7 @@ class LoginstateErorr extends LoginstateState {
   LoginstateErorr(this.message);
 }
 
+class IsvisibleState extends LoginstateState {}
 
 class SignUpstateLoading extends LoginstateState {}
 class SignUpstateSuccesses extends LoginstateState {}

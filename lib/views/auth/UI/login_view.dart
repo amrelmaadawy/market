@@ -8,16 +8,32 @@ import 'package:app/core/components/custom_text_form_field.dart';
 import 'package:app/views/auth/UI/widgets/login_widget.dart';
 import 'package:app/views/auth/UI/widgets/text_button.dart';
 import 'package:app/views/auth/logic/loginstate_cubit.dart';
-import 'package:app/views/home/UI/home_view.dart';
 import 'package:app/views/nav_bar/UI/main_home_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class LoginView extends StatelessWidget {
-  LoginView({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+@override
+  void initState() {
+    if (kDebugMode) {
+      print(Supabase.instance.client.auth.currentUser);
+    }
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginstateCubit, LoginstateState>(
@@ -25,9 +41,10 @@ class LoginView extends StatelessWidget {
         if (state is SignUpstateSuccesses) {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return const HomeView();
+            return  MainHomeView();
           }));
-        } else if (state is LoginstateErorr) {
+        }
+        if (state is LoginstateErorr) {
           snakeBar(context, state.message, Colors.red);
         }
       },
@@ -76,11 +93,17 @@ class LoginView extends StatelessWidget {
                                 CustomTextFormFeild(
                                     lableText: 'Password',
                                     controller: passwordController,
-                                    obscureText: true,
+                                    obscureText: cubit.isVisible,
                                     keyboardType: TextInputType.visiblePassword,
                                     suffixIcon: IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(Icons.visibility))),
+                                        onPressed: () {
+                                          cubit.changeVisibility();
+                                        },
+                                        icon:  Icon(
+                                          cubit.isVisible
+                                              ? Icons.visibility_off
+                                              :
+                                          Icons.visibility))),
                                 const SizedBox(
                                   height: 16,
                                 ),
@@ -172,8 +195,10 @@ class LoginView extends StatelessWidget {
     );
   }
 
+  @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    super.dispose();
   }
 }
