@@ -29,3 +29,12 @@ class GoogleSignInErorr extends LoginstateState {
   GoogleSignInErorr(this.message);
 }
 
+
+class LogoutLoading extends LoginstateState {}
+
+class LogoutSuccesses extends LoginstateState {}
+
+class LogoutErorr extends LoginstateState {
+  final String message;
+  LogoutErorr(this.message);
+}
