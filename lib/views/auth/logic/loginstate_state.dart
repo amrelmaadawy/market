@@ -38,3 +38,13 @@ class LogoutErorr extends LoginstateState {
   final String message;
   LogoutErorr(this.message);
 }
+
+
+class ResetPasswordLoading extends LoginstateState {}
+
+class ResetPasswordSuccesses extends LoginstateState {}
+
+class ResetPasswordErorr extends LoginstateState {
+  final String message;
+  ResetPasswordErorr(this.message);
+}
