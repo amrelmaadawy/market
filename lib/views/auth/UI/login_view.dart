@@ -27,21 +27,22 @@ class _LoginViewState extends State<LoginView> {
   final TextEditingController passwordController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-@override
+  @override
   void initState() {
     if (kDebugMode) {
       print(Supabase.instance.client.auth.currentUser);
     }
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginstateCubit, LoginstateState>(
       listener: (context, state) {
-        if (state is SignUpstateSuccesses) {
+        if (state is LoginstateSuccesses || state is GoogleSignInSuccesses) {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return  MainHomeView();
+            return MainHomeView();
           }));
         }
         if (state is LoginstateErorr) {
@@ -99,11 +100,9 @@ class _LoginViewState extends State<LoginView> {
                                         onPressed: () {
                                           cubit.changeVisibility();
                                         },
-                                        icon:  Icon(
-                                          cubit.isVisible
-                                              ? Icons.visibility_off
-                                              :
-                                          Icons.visibility))),
+                                        icon: Icon(cubit.isVisible
+                                            ? Icons.visibility_off
+                                            : Icons.visibility))),
                                 const SizedBox(
                                   height: 16,
                                 ),
@@ -160,7 +159,9 @@ class _LoginViewState extends State<LoginView> {
                                 ),
                                 LoginWidget(
                                   text: 'Login With Google',
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    cubit.nativeGoogleSignIn();
+                                  },
                                 ),
                                 const SizedBox(
                                   height: 20,

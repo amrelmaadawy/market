@@ -20,4 +20,12 @@ class SignUpstateErorr extends LoginstateState {
   SignUpstateErorr(this.message);
 }
 
+class GoogleSignInLoading extends LoginstateState {}
+
+class GoogleSignInSuccesses extends LoginstateState {}
+
+class GoogleSignInErorr extends LoginstateState {
+  final String message;
+  GoogleSignInErorr(this.message);
+}
 

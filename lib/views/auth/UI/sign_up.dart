@@ -121,7 +121,9 @@ class _SignUpState extends State<SignUp> {
                           ),
                           LoginWidget(
                             text: 'Sign Up With Google',
-                            onPressed: () {},
+                            onPressed: () {
+                              cubit.nativeGoogleSignIn();
+                            },
                           ),
                           const SizedBox(
                             height: 20,

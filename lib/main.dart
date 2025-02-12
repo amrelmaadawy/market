@@ -1,4 +1,5 @@
 import 'package:app/core/app_colors.dart';
+import 'package:app/core/functions/bloc_observer.dart';
 import 'package:app/views/auth/UI/login_view.dart';
 import 'package:app/views/auth/logic/loginstate_cubit.dart';
 import 'package:app/views/nav_bar/UI/main_home_view.dart';
@@ -18,6 +19,7 @@ void main() async {
       detectSessionInUri: true,
     ),
   );
+  Bloc.observer = MyObserver();
   runApp(const MyApp());
 }
 
