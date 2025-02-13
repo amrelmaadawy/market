@@ -48,3 +48,24 @@ class ResetPasswordErorr extends LoginstateState {
   final String message;
   ResetPasswordErorr(this.message);
 }
+
+
+class AddUsersLoading extends LoginstateState {}
+
+class AddUsersSuccesses extends LoginstateState {}
+
+class AddUsersErorr extends LoginstateState {
+  final String message;
+  AddUsersErorr(this.message);
+}
+
+
+
+class GetDataLoading extends LoginstateState {}
+
+class GetDataSuccesses extends LoginstateState {}
+
+class GetDataErorr extends LoginstateState {
+  final String message;
+  GetDataErorr(this.message);
+}

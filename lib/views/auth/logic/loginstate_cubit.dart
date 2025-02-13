@@ -1,3 +1,4 @@
+import 'package:app/views/auth/logic/module/user_module.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -20,6 +21,7 @@ class LoginstateCubit extends Cubit<LoginstateState> {
     emit(LoginstateLoading());
     try {
       await client.auth.signInWithPassword(password: password, email: email);
+      await getData();
       emit(LoginstateSuccesses());
     } on AuthApiException catch (e) {
       emit(LoginstateErorr(e.message));
@@ -41,6 +43,8 @@ class LoginstateCubit extends Cubit<LoginstateState> {
     emit(SignUpstateLoading());
     try {
       await client.auth.signUp(password: password, email: email);
+      await addUsersInDataBase(email: email, name: name);
+      await getData();
       emit(SignUpstateSuccesses());
     } on AuthApiException catch (e) {
       emit(SignUpstateErorr(e.message));
@@ -82,6 +86,11 @@ class LoginstateCubit extends Cubit<LoginstateState> {
       idToken: idToken,
       accessToken: accessToken,
     );
+    await addUsersInDataBase(
+      name: googleUser.displayName!,
+      email: googleUser.email,
+    );
+    await getData();
     emit(GoogleSignInSuccesses());
     return response;
   }
@@ -103,6 +112,44 @@ class LoginstateCubit extends Cubit<LoginstateState> {
       emit(ResetPasswordSuccesses());
     } catch (e) {
       emit(ResetPasswordErorr(e.toString()));
+    }
+  }
+
+  Future<void> addUsersInDataBase(
+      {required String name, required String email}) async {
+    emit(AddUsersLoading());
+    try {
+      await client.from('Users').upsert({
+        'name': name,
+        'email': email,
+        'id': client.auth.currentUser!.id,
+      });
+      emit(AddUsersSuccesses());
+    } catch (e) {
+      emit(AddUsersErorr(e.toString()));
+    }
+  }
+
+  UserModule? userModule;
+  Future<void> getData() async {
+    emit(GetDataLoading());
+    try {
+      final data = await client
+          .from('Users')
+          .select()
+          .eq('id', client.auth.currentUser!.id);
+      userModule = UserModule(
+          email: data[0]['email'], id: data[0]['id'], name: data[0]['name']);
+      if (kDebugMode) {
+        print(data);
+      }
+      emit(GetDataSuccesses());
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+        print("===========================================");
+      }
+      emit(GetDataErorr(e.toString()));
     }
   }
 }
