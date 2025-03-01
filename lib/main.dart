@@ -1,5 +1,6 @@
 import 'package:app/core/app_colors.dart';
 import 'package:app/core/functions/bloc_observer.dart';
+import 'package:app/core/sensitive_data.dart';
 import 'package:app/views/auth/UI/login_view.dart';
 import 'package:app/views/auth/logic/loginstate_cubit.dart';
 import 'package:app/views/nav_bar/UI/main_home_view.dart';
@@ -13,7 +14,7 @@ void main() async {
   await Supabase.initialize(
     url: 'https://zieeiuozhhjeiseqclvd.supabase.co',
     anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InppZWVpdW96aGhqZWlzZXFjbHZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg3NzAzMjgsImV4cCI6MjA1NDM0NjMyOH0.qUj1vsfmjIVbXDbFXD3SVJavx5RzHE1dSwFKAAEulDE',
+        apiKey,
     authOptions: const FlutterAuthClientOptions(
       autoRefreshToken: true,
       detectSessionInUri: true,
