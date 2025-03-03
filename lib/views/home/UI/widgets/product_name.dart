@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 class ProductName extends StatelessWidget {
   const ProductName({
     super.key,
+    required this.productName,
   });
-
+  final String productName;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          'product Name',
+        Text(
+          productName,
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         IconButton(

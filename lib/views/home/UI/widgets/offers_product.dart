@@ -5,13 +5,16 @@ import 'package:flutter/material.dart';
 class OffersProduct extends StatelessWidget {
   const OffersProduct({
     super.key,
+    required this.imageUrl,
+    required this.offer,
   });
-
+  final String imageUrl;
+  final String offer;
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const ClipRRect(
+         ClipRRect(
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(16),
             bottomLeft: Radius.circular(16),
@@ -19,7 +22,7 @@ class OffersProduct extends StatelessWidget {
           ),
           child: CashedLoadingWidget(
               imageUrl:
-                  "https://img.freepik.com/free-psd/circle-discount-sale-podium_35913-2513.jpg?t=st=1738732832~exp=1738736432~hmac=c97147653932da8294749ff6181c671f46287b814908e81bdebd9608602f93d9&w=1060"),
+                  imageUrl),
         ),
         Positioned(
           child: Container(
@@ -30,10 +33,10 @@ class OffersProduct extends StatelessWidget {
                 bottomRight: Radius.circular(16),
               ),
             ),
-            child: const Padding(
+            child:  Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                '50 % OFF',
+                "OFF $offer %",
                 style: TextStyle(
                   color: AppColors.kWhiteColor,
                   fontSize: 20,

@@ -16,10 +16,13 @@ class HomeCubit extends Cubit<HomeState> {
       for (var product in response.data) {
         products.add(ProductModel.fromJson(product));
       }
-      
+
       emit(GetDataSuccesseState());
     } catch (e) {
+      
       emit(GetDataErrorState(e.toString()));
     }
   }
+
+
 }

@@ -5,17 +5,20 @@ import 'package:flutter/material.dart';
 class ProductPrice extends StatelessWidget {
   const ProductPrice({
     super.key,
+    required this.newPrice,
+    required this.oldPrice,
   });
-
+  final String oldPrice;
+  final String newPrice;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Column(
+        Column(
           children: [
             Text(
-              '120',
+              newPrice,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -26,7 +29,7 @@ class ProductPrice extends StatelessWidget {
               height: 5,
             ),
             Text(
-              '150',
+              oldPrice,
               style: TextStyle(
                 decoration: TextDecoration.lineThrough,
                 fontSize: 16,

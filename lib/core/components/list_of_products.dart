@@ -25,7 +25,9 @@ class ListOfProducts extends StatelessWidget {
               physics: physics ?? const NeverScrollableScrollPhysics(),
               itemCount: product.length,
               itemBuilder: (context, index) {
-                return const ProductCard();
+                return ProductCard(
+                  products: product[index],
+                );
               });
         },
       ),
