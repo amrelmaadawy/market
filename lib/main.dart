@@ -13,8 +13,7 @@ void main() async {
 
   await Supabase.initialize(
     url: 'https://zieeiuozhhjeiseqclvd.supabase.co',
-    anonKey:
-        apiKey,
+    anonKey: apiKey,
     authOptions: const FlutterAuthClientOptions(
       autoRefreshToken: true,
       detectSessionInUri: true,

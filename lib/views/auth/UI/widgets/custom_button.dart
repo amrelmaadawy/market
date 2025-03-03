@@ -1,4 +1,3 @@
-
 import 'package:app/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +5,7 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.onPressed,
-    required  this.child,
+    required this.child,
   });
 
   final Function()? onPressed;

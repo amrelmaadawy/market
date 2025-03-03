@@ -1,4 +1,3 @@
-
 import 'package:app/views/home/UI/widgets/offers_product.dart';
 import 'package:app/views/home/UI/widgets/product_name.dart';
 import 'package:app/views/home/UI/widgets/product_price.dart';
@@ -13,8 +12,9 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProductDetails()));
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ProductDetails()));
       },
       child: const Column(
         children: [
@@ -24,7 +24,9 @@ class ProductCard extends StatelessWidget {
           ),
           ProductName(),
           ProductPrice(),
-          SizedBox(height: 10,)
+          SizedBox(
+            height: 10,
+          )
         ],
       ),
     );

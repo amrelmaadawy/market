@@ -1,4 +1,3 @@
-
 import 'package:app/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +25,6 @@ class CustomTextFormFeild extends StatelessWidget {
         return null;
       },
       keyboardType: keyboardType,
-      
       controller: controller,
       decoration: InputDecoration(
         suffixIcon: suffixIcon,

@@ -5,7 +5,9 @@ abstract class LoginstateState {}
 class LoginstateInitial extends LoginstateState {}
 
 class LoginstateLoading extends LoginstateState {}
+
 class LoginstateSuccesses extends LoginstateState {}
+
 class LoginstateErorr extends LoginstateState {
   final String message;
   LoginstateErorr(this.message);
@@ -14,7 +16,9 @@ class LoginstateErorr extends LoginstateState {
 class IsvisibleState extends LoginstateState {}
 
 class SignUpstateLoading extends LoginstateState {}
+
 class SignUpstateSuccesses extends LoginstateState {}
+
 class SignUpstateErorr extends LoginstateState {
   final String message;
   SignUpstateErorr(this.message);
@@ -29,7 +33,6 @@ class GoogleSignInErorr extends LoginstateState {
   GoogleSignInErorr(this.message);
 }
 
-
 class LogoutLoading extends LoginstateState {}
 
 class LogoutSuccesses extends LoginstateState {}
@@ -38,7 +41,6 @@ class LogoutErorr extends LoginstateState {
   final String message;
   LogoutErorr(this.message);
 }
-
 
 class ResetPasswordLoading extends LoginstateState {}
 
@@ -49,7 +51,6 @@ class ResetPasswordErorr extends LoginstateState {
   ResetPasswordErorr(this.message);
 }
 
-
 class AddUsersLoading extends LoginstateState {}
 
 class AddUsersSuccesses extends LoginstateState {}
@@ -58,8 +59,6 @@ class AddUsersErorr extends LoginstateState {
   final String message;
   AddUsersErorr(this.message);
 }
-
-
 
 class GetDataLoading extends LoginstateState {}
 

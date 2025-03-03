@@ -24,7 +24,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         listener: (context, state) {
           if (state is ResetPasswordSuccesses) {
             Navigator.pop(context);
-            snakeBar(context,'Email sended successfully', Colors.green);
+            snakeBar(context, 'Email sended successfully', Colors.green);
           }
         },
         builder: (context, state) {

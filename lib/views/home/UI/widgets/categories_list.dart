@@ -1,4 +1,3 @@
-
 import 'package:app/core/app_colors.dart';
 import 'package:app/views/home/logic/categories.dart';
 import 'package:flutter/material.dart';

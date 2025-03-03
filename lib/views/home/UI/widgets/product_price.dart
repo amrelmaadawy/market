@@ -1,4 +1,3 @@
-
 import 'package:app/core/app_colors.dart';
 import 'package:app/views/auth/UI/widgets/custom_button.dart';
 import 'package:flutter/material.dart';

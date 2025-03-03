@@ -8,16 +8,15 @@ class MyOrdersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context, 'My Orders'),
-      body: const SafeArea(
-        child:  Padding(
-          padding: EdgeInsets.all(16.0),
-          child: ListOfProducts(
-            shrinkWrap: false,
-            physics: ScrollPhysics(),
+        appBar: customAppBar(context, 'My Orders'),
+        body: const SafeArea(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: ListOfProducts(
+              shrinkWrap: false,
+              physics: ScrollPhysics(),
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }
