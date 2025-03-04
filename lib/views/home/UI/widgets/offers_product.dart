@@ -14,15 +14,13 @@ class OffersProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-         ClipRRect(
+        ClipRRect(
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(16),
             bottomLeft: Radius.circular(16),
             bottomRight: Radius.circular(16),
           ),
-          child: CashedLoadingWidget(
-              imageUrl:
-                  imageUrl),
+          child: CashedLoadingWidget(imageUrl: imageUrl),
         ),
         Positioned(
           child: Container(
@@ -33,7 +31,7 @@ class OffersProduct extends StatelessWidget {
                 bottomRight: Radius.circular(16),
               ),
             ),
-            child:  Padding(
+            child: Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
                 "OFF $offer %",

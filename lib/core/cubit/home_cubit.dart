@@ -19,10 +19,7 @@ class HomeCubit extends Cubit<HomeState> {
 
       emit(GetDataSuccesseState());
     } catch (e) {
-      
       emit(GetDataErrorState(e.toString()));
     }
   }
-
-
 }
