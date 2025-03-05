@@ -10,6 +10,8 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   ProductDetailsCubit() : super(ProductDetailsInitial());
   final DioServises _dioServises = DioServises();
   List<Rates> rates = [];
+
+  int avrage = 0;
   Future<void> getRate({required String productId}) async {
     emit(GetRatesLoadingState());
 
@@ -19,6 +21,11 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       for (var rate in response.data) {
         rates.add(Rates.fromJson(rate));
       }
+
+      for (var userRate in rates) {
+        avrage += userRate.rates!;
+      }
+      avrage = avrage ~/ rates.length;
       emit(GetRatesSuccessState());
     } catch (e) {
       emit(GetRatesErrorState(error: e.toString()));
