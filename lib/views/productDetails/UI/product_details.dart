@@ -66,7 +66,7 @@ class ProductDetails extends StatelessWidget {
                     Center(
                         child:
                             Text(product.description ?? 'Product Description')),
-                    const Rating(),
+                    Rating(rate : cubit.userRate.toDouble()),
                     const SizedBox(
                       height: 16,
                     ),
