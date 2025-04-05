@@ -18,79 +18,98 @@ class ProductDetails extends StatelessWidget {
       create: (context) =>
           ProductDetailsCubit()..getRate(productId: product.productId!),
       child: BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is AddOrupdateRateSuccessState) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => this));
+          }
+        },
         builder: (context, state) {
           ProductDetailsCubit cubit = context.read<ProductDetailsCubit>();
           return Scaffold(
             appBar: customAppBar(context, product.productName ?? ''),
-            body: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: CashedLoadingWidget(imageUrl: product.imageUrl),
+            body: state is GetRatesLoadingState
+                ? Center(child: CircularProgressIndicator())
+                : Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child:
+                                CashedLoadingWidget(imageUrl: product.imageUrl),
+                          ),
+                          const SizedBox(
+                            height: 16, 
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(product.productName ?? 'Product Name'),
+                              Text(product.price ?? ''),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            children: [
+                              Text('${cubit.avrage}'),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow[700],
+                              ),
+                              const Spacer(),
+                              const Icon(
+                                Icons.favorite,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Center(
+                              child: Text(product.description ??
+                                  'Product Description')),
+                          Rating(
+                            rate: cubit.userRate.toDouble(),
+                            onRatingUpdate: (rating) {
+                              cubit.addOrUpdateRate(
+                                  productId: cubit.userId,
+                                  data: {
+                                    "rates": rating.toInt(),
+                                    "user_id": cubit.userId,
+                                    "product_id": product.productId
+                                  });
+                            },
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          CustomTextFormFeild(
+                            lableText: 'Enter Your Feed Back',
+                            controller: feedBackController,
+                            obscureText: false,
+                            keyboardType: TextInputType.text,
+                            suffixIcon: IconButton(
+                                onPressed: () {}, icon: const Icon(Icons.send)),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const Text('Comments',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              )),
+                          const Comments()
+                        ],
+                      ),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(product.productName ?? 'Product Name'),
-                        Text(product.price ?? ''),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      children: [
-                        Text('${cubit.avrage}'),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow[700],
-                        ),
-                        const Spacer(),
-                        const Icon(
-                          Icons.favorite,
-                          color: Colors.grey,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Center(
-                        child:
-                            Text(product.description ?? 'Product Description')),
-                    Rating(rate : cubit.userRate.toDouble()),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomTextFormFeild(
-                      lableText: 'Enter Your Feed Back',
-                      controller: feedBackController,
-                      obscureText: false,
-                      keyboardType: TextInputType.text,
-                      suffixIcon: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.send)),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    const Text('Comments',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        )),
-                    const Comments()
-                  ],
-                ),
-              ),
-            ),
+                  ),
           );
         },
       ),

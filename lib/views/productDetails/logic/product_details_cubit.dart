@@ -14,6 +14,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   List<Rates> rates = [];
   int userRate = 5;
   int avrage = 0;
+  String userId = Supabase.instance.client.auth.currentUser!.id;
   Future<void> getRate({required String productId}) async {
     emit(GetRatesLoadingState());
 
@@ -27,17 +28,22 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       for (var userRate in rates) {
         avrage += userRate.rates!;
       }
-      avrage = avrage ~/ rates.length;
+
+      if (rates.isNotEmpty) {
+        avrage = avrage ~/ rates.length;
+      } else {
+        avrage = 0;
+      }
 
       List<Rates> userRates = rates.where((Rates rates) {
-        return rates.userId == Supabase.instance.client.auth.currentUser!.id;
+        return rates.userId == userId;
       }).toList();
       if (userRates.isNotEmpty) {
         userRate = userRates[0].rates!;
       }
       if (kDebugMode) {
         print('rate for user ${rates[0].userId}');
-        print('user Id ${Supabase.instance.client.auth.currentUser!.id}');
+        print('user Id $userId');
         print('user length ${userRates.length}');
         print('user length $userRate');
       }
@@ -46,4 +52,32 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       emit(GetRatesErrorState(error: e.toString()));
     }
   }
+
+  bool _isRateExist({required String productId}) {
+    return rates
+        .any((rate) => rate.userId == userId && rate.productId == productId);
+  }
+
+
+  Future<void> addOrUpdateRate(
+      {required String productId, required Map<String, dynamic> data}) async {
+    emit(AddOrupdateRateLoadingState());
+    String path = 'rates?select=*&product_id=eq.$productId&user_id=eq.$userId';
+    try {
+      if (_isRateExist(productId: productId)) {
+        await _dioServises.patchData(path, data);
+        emit(PatchState());
+      } else {
+        await _dioServises.postData(path, data);
+        emit(PostState());
+      }
+      emit(AddOrupdateRateSuccessState());
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      emit(AddOrupdateRateErrorState());
+    }
+  }
+
 }

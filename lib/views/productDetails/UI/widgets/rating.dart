@@ -5,8 +5,10 @@ class Rating extends StatelessWidget {
   const Rating({
     super.key,
     required this.rate,
+    required this.onRatingUpdate,
   });
   final double rate;
+  final void Function(double) onRatingUpdate;
   @override
   Widget build(BuildContext context) {
     return RatingBar.builder(
@@ -20,7 +22,7 @@ class Rating extends StatelessWidget {
         Icons.star,
         color: Colors.amber,
       ),
-      onRatingUpdate: (rating) {},
+      onRatingUpdate: onRatingUpdate,
     );
   }
 }

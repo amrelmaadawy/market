@@ -18,3 +18,13 @@ class GetRatesErrorState extends ProductDetailsState {
 
   final String error;
 }
+
+class AddOrupdateRateLoadingState extends ProductDetailsState {}
+
+class AddOrupdateRateSuccessState extends ProductDetailsState {}
+
+class AddOrupdateRateErrorState extends ProductDetailsState {}
+
+class PostState extends ProductDetailsState {}
+
+class PatchState extends ProductDetailsState {}
