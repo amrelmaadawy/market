@@ -25,6 +25,8 @@ class AddOrupdateRateSuccessState extends ProductDetailsState {}
 
 class AddOrupdateRateErrorState extends ProductDetailsState {}
 
-class PostState extends ProductDetailsState {}
+class AddCommentLoadingState extends ProductDetailsState {}
 
-class PatchState extends ProductDetailsState {}
+class AddCommentSuccessState extends ProductDetailsState {}
+
+class AddCommentErrorState extends ProductDetailsState {}

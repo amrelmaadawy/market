@@ -58,7 +58,6 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
         .any((rate) => rate.userId == userId && rate.productId == productId);
   }
 
-
   Future<void> addOrUpdateRate(
       {required String productId, required Map<String, dynamic> data}) async {
     emit(AddOrupdateRateLoadingState());
@@ -66,10 +65,8 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
     try {
       if (_isRateExist(productId: productId)) {
         await _dioServises.patchData(path, data);
-        emit(PatchState());
       } else {
         await _dioServises.postData(path, data);
-        emit(PostState());
       }
       emit(AddOrupdateRateSuccessState());
     } catch (e) {
@@ -80,4 +77,18 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
     }
   }
 
+  Future<void> addComment({
+    required Map<String, dynamic> data,
+    required String productId,
+    required String userId,
+  }) async {
+    emit(AddCommentLoadingState());
+    String path = 'comments?&user_id=eq.$userId&product_id=eq.$productId';
+    try {
+      await _dioServises.postData(path, data);
+      emit(AddCommentSuccessState());
+    } catch (e) {
+      emit(AddCommentErrorState());
+    }
+  }
 }
