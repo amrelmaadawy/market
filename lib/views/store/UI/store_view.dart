@@ -26,7 +26,7 @@ class StoreView extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          SearchFormField(searchController: storeSearchController),
+          SearchFormField(searchController: storeSearchController,onPressed: (){},),
           const SizedBox(height: 16),
           const SizedBox(
             height: 16,

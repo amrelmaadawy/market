@@ -1,5 +1,6 @@
 import 'package:app/core/app_colors.dart';
 import 'package:app/core/components/list_of_products.dart';
+import 'package:app/views/home/UI/search_view.dart';
 import 'package:app/views/home/UI/widgets/categories_list.dart';
 
 import 'package:app/views/home/UI/widgets/search_form_feild.dart';
@@ -15,7 +16,13 @@ class HomeView extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ListView(
         children: [
-          SearchFormField(searchController: mainSearchController),
+          SearchFormField(
+            searchController: mainSearchController,
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const SearchView()));
+            },
+          ),
           const SizedBox(height: 16),
           Image.asset('assets/images/buy.jpg'),
           const SizedBox(height: 16),

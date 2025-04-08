@@ -6,15 +6,16 @@ class SearchFormField extends StatelessWidget {
   const SearchFormField({
     super.key,
     required this.searchController,
+    required this.onPressed,
   });
 
   final TextEditingController searchController;
-
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return CustomTextFormFeild(
         suffixIcon: ElevatedButton(
-          onPressed: () {},
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.kPrimaryColor,
             shape:

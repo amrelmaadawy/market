@@ -113,6 +113,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                         "comment": feedBackController.text,
                                         "user_id": cubit.userId,
                                         "product_id": widget.product.productId,
+                                        // ignore: use_build_context_synchronously
                                         "user_name": context
                                                 .read<LoginstateCubit>()
                                                 .userModule
