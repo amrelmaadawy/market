@@ -131,7 +131,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               )),
-                          Comments()
+                          Comments(productModel:widget.product,)
                         ],
                       ),
                     ),
