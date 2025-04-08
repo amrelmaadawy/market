@@ -105,6 +105,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                             keyboardType: TextInputType.text,
                             suffixIcon: IconButton(
                                 onPressed: () async {
+                                  await context
+                                      .read<LoginstateCubit>()
+                                      .getData();
                                   await cubit.addComment(
                                       data: {
                                         "comment": feedBackController.text,
@@ -131,7 +134,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               )),
-                          Comments(productModel:widget.product,)
+                          Comments(
+                            productModel: widget.product,
+                          )
                         ],
                       ),
                     ),
