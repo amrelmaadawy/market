@@ -114,7 +114,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                 .read<LoginstateCubit>()
                                                 .userModule
                                                 ?.name ??
-                                            'user name',
+                                            'User Name',
                                       },
                                       productId: widget.product.productId!,
                                       userId: cubit.userId);
