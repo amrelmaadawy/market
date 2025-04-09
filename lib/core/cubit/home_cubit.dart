@@ -10,7 +10,7 @@ class HomeCubit extends Cubit<HomeState> {
   final DioServises _dioServises = DioServises();
   List<ProductModel> products = [];
   List<ProductModel> searchResult = [];
-  Future<void> getProduct({String? quary}) async {
+  Future<void> getProduct({String? query}) async {
     emit(GetDataLoadingState());
     try {
       Response response = await _dioServises
@@ -18,17 +18,17 @@ class HomeCubit extends Cubit<HomeState> {
       for (var product in response.data) {
         products.add(ProductModel.fromJson(product));
       }
-      searchProduct(quary);
+      search(query);
       emit(GetDataSuccesseState());
     } catch (e) {
       emit(GetDataErrorState(e.toString()));
     }
   }
 
-  void searchProduct(String? quary) {
-    if (quary != null) {
+  void search(String? query) {
+    if (query != null) {
       for (var product in products) {
-        if (product.productName!.toLowerCase().contains(quary.toLowerCase())) {
+        if (product.productName!.toLowerCase().contains(query.toLowerCase())) {
           searchResult.add(product);
         }
       }

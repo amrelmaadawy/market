@@ -6,21 +6,32 @@ import 'package:app/views/home/UI/widgets/categories_list.dart';
 import 'package:app/views/home/UI/widgets/search_form_feild.dart';
 import 'package:flutter/material.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  TextEditingController mainSearchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    TextEditingController mainSearchController = TextEditingController();
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView(
         children: [
+          SizedBox(
+            height: 15,
+          ),
           SearchFormField(
             searchController: mainSearchController,
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const SearchView()));
+              if (mainSearchController.text.isNotEmpty) {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return SearchView(query: mainSearchController.text);
+                }));
+              }
             },
           ),
           const SizedBox(height: 16),
@@ -52,5 +63,11 @@ class HomeView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    mainSearchController.dispose();
+    super.dispose();
   }
 }
