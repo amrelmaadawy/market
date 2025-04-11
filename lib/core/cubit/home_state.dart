@@ -12,3 +12,9 @@ class GetDataErrorState extends HomeState {
   final String massage;
   GetDataErrorState(this.massage);
 }
+
+class AddToFaveLoadingState extends HomeState {}
+
+class AddToFaveSuccesseState extends HomeState {}
+
+class AddToFaveErrorState extends HomeState {}

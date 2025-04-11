@@ -11,6 +11,7 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductModel> products = [];
   List<ProductModel> searchResult = [];
   List<ProductModel> categoryList = [];
+  
   Future<void> getProduct({String? query, String? category}) async {
     emit(GetDataLoadingState());
     try {
@@ -40,10 +41,23 @@ class HomeCubit extends Cubit<HomeState> {
   void getCategory(String? category) {
     if (category != null) {
       for (var product in products) {
-        if (product.category!.trim().toLowerCase() == category.trim().toLowerCase()) {
+        if (product.category!.trim().toLowerCase() ==
+            category.trim().toLowerCase()) {
           categoryList.add(product);
         }
       }
+    }
+  }
+
+  Future<void> addToFave(
+      {required String productId, required Map<String, dynamic> data}) async {
+    String path = 'fave_product';
+    emit(AddToFaveLoadingState());
+    try {
+      await _dioServises.postData(path, data);
+      emit(AddToFaveSuccesseState());
+    } catch (e) {
+      emit(AddToFaveErrorState());
     }
   }
 }
