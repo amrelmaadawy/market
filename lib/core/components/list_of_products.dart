@@ -11,11 +11,13 @@ class ListOfProducts extends StatelessWidget {
     this.physics,
     this.query,
     this.category,
+    this.isFaveoriteView = false,
   });
   final bool? shrinkWrap;
   final ScrollPhysics? physics;
   final String? query;
   final String? category;
+  final bool isFaveoriteView;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -29,7 +31,9 @@ class ListOfProducts extends StatelessWidget {
               ? homeCubit.searchResult
               : category != null
                   ? homeCubit.categoryList
-                  : homeCubit.products;
+                  : isFaveoriteView
+                      ? homeCubit.favoriteProductsList
+                      : homeCubit.products;
           return ListView.builder(
               shrinkWrap: shrinkWrap ?? true,
               physics: physics ?? const NeverScrollableScrollPhysics(),
@@ -42,8 +46,11 @@ class ListOfProducts extends StatelessWidget {
                   onPressed: () {
                     bool isFavorite = homeCubit.checkIsFave(
                         productId: product[index].productId!);
-                        isFavorite? homeCubit.deletFave(productId: product[index].productId!):
-                    homeCubit.addToFave(productId: product[index].productId!);
+                    isFavorite
+                        ? homeCubit.deletFave(
+                            productId: product[index].productId!)
+                        : homeCubit.addToFave(
+                            productId: product[index].productId!);
                   },
                 );
               });

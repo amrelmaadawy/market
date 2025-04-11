@@ -13,8 +13,14 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductModel> products = [];
   List<ProductModel> searchResult = [];
   List<ProductModel> categoryList = [];
+  List<ProductModel> favoriteProductsList = [];
+  Map<String, bool> isFave = {};
   String userId = Supabase.instance.client.auth.currentUser!.id;
   Future<void> getProduct({String? query, String? category}) async {
+    products.clear();
+    searchResult.clear();
+    categoryList.clear();
+    favoriteProductsList.clear();
     emit(GetDataLoadingState());
     try {
       Response response = await _dioServises
@@ -52,7 +58,6 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  Map<String, bool> isFave = {};
   Future<void> addToFave({required String productId}) async {
     String path = 'fave_product';
     emit(AddToFaveLoadingState());
@@ -62,6 +67,7 @@ class HomeCubit extends Cubit<HomeState> {
         "for_user": userId,
         "for_product": productId,
       });
+      
       isFave.addAll({productId: true});
       emit(AddToFaveSuccesseState());
     } catch (e) {
@@ -79,13 +85,13 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await _dioServises.deletData(path);
       isFave.removeWhere((key, value) => key == productId);
+      await getProduct();
       emit(DeletFromFaveSuccesseState());
     } catch (e) {
       emit(DeletFromFaveErrorState());
     }
   }
 
-  List<ProductModel> favoriteProductsList = [];
   void getFaveProduct() {
     for (ProductModel product in products) {
       if (product.faveProduct!.isNotEmpty) {
