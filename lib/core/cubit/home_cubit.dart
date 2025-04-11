@@ -1,4 +1,5 @@
 import 'package:app/core/dio_servises.dart';
+import 'package:app/core/models/product_model/fave_product.dart';
 import 'package:app/core/models/product_model/product_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
@@ -21,6 +22,7 @@ class HomeCubit extends Cubit<HomeState> {
       for (var product in response.data) {
         products.add(ProductModel.fromJson(product));
       }
+      getFaveProduct();
       search(query);
       getCategory(category);
       emit(GetDataSuccesseState());
@@ -69,5 +71,33 @@ class HomeCubit extends Cubit<HomeState> {
 
   bool checkIsFave({required String productId}) {
     return isFave.containsKey(productId);
+  }
+
+  Future<void> deletFave({required String productId}) async {
+    emit(DeletFromFaveLoadingState());
+    String path = 'fave_product?for_product=eq.$productId&for_user=eq.$userId';
+    try {
+      await _dioServises.deletData(path);
+      isFave.removeWhere((key, value) => key == productId);
+      emit(DeletFromFaveSuccesseState());
+    } catch (e) {
+      emit(DeletFromFaveErrorState());
+    }
+  }
+
+  List<ProductModel> favoriteProductsList = [];
+  void getFaveProduct() {
+    for (ProductModel product in products) {
+      if (product.faveProduct!.isNotEmpty) {
+        for (FaveProduct favoriteProduct in product.faveProduct!) {
+          if (favoriteProduct.forUser == userId) {
+            favoriteProductsList.add(product);
+            isFave.addAll({
+              product.productId!: true,
+            });
+          }
+        }
+      }
+    }
   }
 }

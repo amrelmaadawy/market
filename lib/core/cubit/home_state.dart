@@ -18,3 +18,10 @@ class AddToFaveLoadingState extends HomeState {}
 class AddToFaveSuccesseState extends HomeState {}
 
 class AddToFaveErrorState extends HomeState {}
+
+
+class DeletFromFaveLoadingState extends HomeState {}
+
+class DeletFromFaveSuccesseState extends HomeState {}
+
+class DeletFromFaveErrorState extends HomeState {}
