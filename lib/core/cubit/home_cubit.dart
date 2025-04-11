@@ -2,6 +2,7 @@ import 'package:app/core/dio_servises.dart';
 import 'package:app/core/models/product_model/product_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'home_state.dart';
 
@@ -11,7 +12,7 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductModel> products = [];
   List<ProductModel> searchResult = [];
   List<ProductModel> categoryList = [];
-  
+  String userId = Supabase.instance.client.auth.currentUser!.id;
   Future<void> getProduct({String? query, String? category}) async {
     emit(GetDataLoadingState());
     try {
@@ -49,15 +50,24 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  Future<void> addToFave(
-      {required String productId, required Map<String, dynamic> data}) async {
+  Map<String, bool> isFave = {};
+  Future<void> addToFave({required String productId}) async {
     String path = 'fave_product';
     emit(AddToFaveLoadingState());
     try {
-      await _dioServises.postData(path, data);
+      await _dioServises.postData(path, {
+        "is_favorite": true,
+        "for_user": userId,
+        "for_product": productId,
+      });
+      isFave.addAll({productId: true});
       emit(AddToFaveSuccesseState());
     } catch (e) {
       emit(AddToFaveErrorState());
     }
+  }
+
+  bool checkIsFave({required String productId}) {
+    return isFave.containsKey(productId);
   }
 }

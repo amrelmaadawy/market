@@ -10,11 +10,11 @@ class ProductCard extends StatelessWidget {
     super.key,
     required this.products,
     required this.onPressed,
-    required this.color
+  required this.isFave,
   });
   final ProductModel products;
   final void Function() onPressed;
-  final Color color;
+ final bool isFave;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -32,7 +32,7 @@ class ProductCard extends StatelessWidget {
             height: 16,
           ),
           ProductName(
-color: color,
+isFave: isFave,
             onPressed: onPressed,
             productName: products.productName ?? 'name',
           ),

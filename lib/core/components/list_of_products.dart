@@ -3,7 +3,6 @@ import 'package:app/core/cubit/home_cubit.dart';
 import 'package:app/core/models/product_model/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ListOfProducts extends StatelessWidget {
   const ListOfProducts({
@@ -25,12 +24,12 @@ class ListOfProducts extends StatelessWidget {
       child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {},
         builder: (context, state) {
-          String userId = Supabase.instance.client.auth.currentUser!.id;
+          HomeCubit homeCubit = context.read<HomeCubit>();
           List<ProductModel> product = query != null
-              ? context.read<HomeCubit>().searchResult
+              ? homeCubit.searchResult
               : category != null
-                  ? context.read<HomeCubit>().categoryList
-                  : context.read<HomeCubit>().products;
+                  ? homeCubit.categoryList
+                  : homeCubit.products;
           return ListView.builder(
               shrinkWrap: shrinkWrap ?? true,
               physics: physics ?? const NeverScrollableScrollPhysics(),
@@ -38,16 +37,10 @@ class ListOfProducts extends StatelessWidget {
               itemBuilder: (context, index) {
                 return ProductCard(
                   products: product[index],
-                  color: Colors.grey,
+                  isFave: homeCubit.checkIsFave(
+                      productId: product[index].productId!),
                   onPressed: () {
-
-                    context
-                        .read<HomeCubit>()
-                        .addToFave(productId: product[index].productId!, data: {
-                      "is_favorite": true,
-                      "for_user": userId,
-                      "for_product": product[index].productId,
-                    });
+                    homeCubit.addToFave(productId: product[index].productId!);
                   },
                 );
               });

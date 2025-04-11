@@ -4,12 +4,12 @@ class ProductName extends StatelessWidget {
   const ProductName({
     super.key,
     required this.productName,
-    required this.onPressed,  
-    required this.color,
+    required this.onPressed,
+    required this.isFave,
   });
   final String productName;
   final void Function() onPressed;
-  final Color color;
+  final bool isFave;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -23,7 +23,7 @@ class ProductName extends StatelessWidget {
             onPressed: onPressed,
             icon: Icon(
               Icons.favorite,
-              color: color,
+              color:isFave? Colors.red:Colors.grey[600],
             )),
       ],
     );
